@@ -48,7 +48,7 @@ int main(int argc, const char * argv[]) {
 
     do {
       previous = result;
-      result = (((root - 1.0 ) / root) * previous) + (number / (root * pow( previous, root - 1)));
+      result = (((root - 1.0 ) / root) * previous) + (number / (root * pow(previous, root - 1)));
     } while (abs(result - previous) >= precision);
 
     cout << "Root(" << number << "," << root << ") = " << result << endl;
