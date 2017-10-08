@@ -95,18 +95,22 @@ int main(const int argc, const char* const argv[]) {
   }
 
   int gcd = greatestCommonDenominator(atoi(argv[1]),atoi(argv[2]));
-  if (gcd < 0)
+  if (gcd < 0) {
     cerr << "Error: unable to compute GCD(" << argv[1] << "," << argv[2] << ")" << endl;
     return -1;
-  else
+  }
+  else {
     cout << "GCD(" << argv[1] << "," << argv[2] << ") = " << gcd << endl;
+  }
 
   int lcm = leastCommonMultiple(atoi(argv[1]),atoi(argv[2]));
-  if (lcm < 0)
+  if (lcm < 0) {
     cerr << "Error: unable to compute LCM(" << argv[1] << "," << argv[2] << ")" << endl;
     return -1;
-  else
+  }
+  else {
     cout << "LCM(" << argv[1] << "," << argv[2] << ") = " << lcm << endl;
+  }
 
   return 0;
 }
