@@ -56,6 +56,7 @@ float NthRoot(const float S, const int N, const float precision) {
     return std::numeric_limits<float>::quiet_NaN();
   }
   if (((abs(root) % 2) == 0) && number < 0) {
+    return std::numeric_limits<float>::quiet_NaN();
   }
   if (precision <= 0 || precision >= 1) {
     return std::numeric_limits<float>::quiet_NaN();
@@ -64,7 +65,7 @@ float NthRoot(const float S, const int N, const float precision) {
   do {
     previous = result;
     result = (((root - 1.0 ) / root) * previous) + (number / (root * pow(previous, root - 1)));
-  } while (abs(result - previous) >= precision);
+  } while (abs(abs(result) - abs(previous)) >= precision);
 
   return result;
 }

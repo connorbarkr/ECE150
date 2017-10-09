@@ -3,6 +3,13 @@
 // Your #includes here; make sure you are allowed them ...
 //
 
+/*!isNaN(minimum(dataset, size)) &&
+   !isNaN(maximum(dataset, size)) &&
+   !isNaN(average(dataset, size)) &&
+   !isNaN(popStdDev(dataset, size)) &&
+   !isNaN(smplStdDev(dataset, size)) &&
+   !isNaN(median(dataset, size))*/
+
 #include <stdlib.h>
 #include <math.h>
 #include <limits>
@@ -44,11 +51,11 @@ bool isNaN(float X) {
 }
 
 int sizeCheck(int size) {
-  if (size >= 0) {
-    return std::numeric_limits<float>::quiet_NaN();
+  if (size > 0) {
+    return 0;
   }
   else {
-    return 1;
+    return std::numeric_limits<float>::quiet_NaN();
   }
 }
 
@@ -78,17 +85,16 @@ float* bubbleSort(const float dataset[], const int size) {
 bool statistics(const float dataset[], const int size,
 	   float& min, float& avg, float& max,
 	   float& popSD, float& smplSD, float& mdn) {
-       if (!isNaN(minimum(dataset, size)) &&
-          !isNaN(maximum(dataset, size)) &&
-          !isNaN(average(dataset, size)) &&
-          !isNaN(popStdDev(dataset, size)) &&
-          !isNaN(smplStdDev(dataset, size)) &&
-          !isNaN(median(dataset, size))) {
-            return true;
-        }
-        else {
+       min = minimum(dataset, size);
+       avg = average(dataset, size);
+       max = maximum(dataset, size);
+       smplSD = smplStdDev(dataset, size);
+       popSD = popStdDev(dataset, size);
+       mdn = median(dataset, size);
+       if (size < 1) {
           return false;
         }
+        return true;
 }
 
 float minimum(const float dataset[], const int size) {
@@ -114,7 +120,7 @@ float average(const float dataset[], const int size) {
     float current = dataset[i];
     mean += current;
   }
-  return mean / (size);
+  return mean / size;
 }
 
 float maximum(const float dataset[], const int size) {
