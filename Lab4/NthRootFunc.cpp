@@ -52,6 +52,9 @@ float NthRoot(const float S, const int N, const float precision) {
   float result = number / root;
   float previous;
 
+  if (number == 0) {
+    return 0;
+  }
   if (root < 2) {
     return std::numeric_limits<float>::quiet_NaN();
   }
