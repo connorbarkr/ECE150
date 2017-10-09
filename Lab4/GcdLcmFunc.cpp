@@ -4,6 +4,7 @@
 //
 
 #include <stdlib.h>
+#include <climits>
 
 //////////////////////////////////////////////////////////////
 //
@@ -42,6 +43,9 @@ int least(int a, int b) {
 }
 
 int greatestCommonDenominator(const int a, const int b) {
+  if (a <=0 || b <=0) {
+    return -1;
+  }
   int result = 0;
   int i = 1;
   int r;
@@ -70,9 +74,6 @@ int leastCommonMultiple(const int a, const int b) {
   int c = greatest(a, b);
   int d = least(a, b);
   int result = (c / greatestCommonDenominator(c, d)) * d;
-  if (result > INT_MAX) {
-    return -2;
-  }
   return result;
 }
 
@@ -97,7 +98,6 @@ int main(const int argc, const char* const argv[]) {
   int gcd = greatestCommonDenominator(atoi(argv[1]),atoi(argv[2]));
   if (gcd < 0) {
     cerr << "Error: unable to compute GCD(" << argv[1] << "," << argv[2] << ")" << endl;
-    return -1;
   }
   else {
     cout << "GCD(" << argv[1] << "," << argv[2] << ") = " << gcd << endl;
@@ -106,7 +106,6 @@ int main(const int argc, const char* const argv[]) {
   int lcm = leastCommonMultiple(atoi(argv[1]),atoi(argv[2]));
   if (lcm < 0) {
     cerr << "Error: unable to compute LCM(" << argv[1] << "," << argv[2] << ")" << endl;
-    return -1;
   }
   else {
     cout << "LCM(" << argv[1] << "," << argv[2] << ") = " << lcm << endl;

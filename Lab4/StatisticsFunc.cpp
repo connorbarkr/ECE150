@@ -15,7 +15,6 @@
 #ifndef MARMOSET_TESTING
 
 #include <iostream>
-#define isNaN(X) (X != X)
 
 using namespace std;
 
@@ -29,12 +28,52 @@ float maximum(const float dataset[], const int size);
 float popStdDev(const float dataset[], const int size);
 float smplStdDev(const float dataset[], const int size);
 float median(const float dataset[], const int size);
+float* bubbleSort(const float dataset[], const int size);
 #endif
 
 //////////////////////////////////////////////////////////////
 //
 // Your code here ...
 //
+
+bool isNaN(float X) {
+  if (X != X) {
+    return true;
+  }
+  return false;
+}
+
+int sizeCheck(int size) {
+  if (size >= 0) {
+    return std::numeric_limits<float>::quiet_NaN();
+  }
+  else {
+    return 1;
+  }
+}
+
+float* bubbleSort(const float dataset[], const int size) {
+  float arr[size];
+  for (int i = 0; i < size; i++) {
+    arr[i] = dataset[i];
+  }
+  bool swapped = true;
+  int j = 0;
+  float tmp;
+  while (swapped) {
+    swapped = false;
+    j++;
+    for (int i = 0; i < size - j; i++) {
+      if (arr[i] > arr[i + 1]) {
+        tmp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = tmp;
+        swapped = true;
+      }
+    }
+  }
+  return arr;
+}
 
 bool statistics(const float dataset[], const int size,
 	   float& min, float& avg, float& max,
@@ -53,6 +92,9 @@ bool statistics(const float dataset[], const int size,
 }
 
 float minimum(const float dataset[], const int size) {
+  if (isNaN(sizeCheck(size))) {
+    return std::numeric_limits<float>::quiet_NaN();
+  }
   float min = dataset[0];
   for (int i = 1; i < size; i++) {
     float current = dataset[i];
@@ -64,6 +106,9 @@ float minimum(const float dataset[], const int size) {
 }
 
 float average(const float dataset[], const int size) {
+  if (isNaN(sizeCheck(size))) {
+    return std::numeric_limits<float>::quiet_NaN();
+  }
   float mean = 0;
   for (int i = 0; i < size; i++) {
     float current = dataset[i];
@@ -73,6 +118,9 @@ float average(const float dataset[], const int size) {
 }
 
 float maximum(const float dataset[], const int size) {
+  if (isNaN(sizeCheck(size))) {
+    return std::numeric_limits<float>::quiet_NaN();
+  }
   float max = dataset[0];
   for (int i = 1; i < size; i++) {
     float current = dataset[i];
@@ -84,6 +132,9 @@ float maximum(const float dataset[], const int size) {
 }
 
 float popStdDev(const float dataset[], const int size) {
+  if (isNaN(sizeCheck(size))) {
+    return std::numeric_limits<float>::quiet_NaN();
+  }
   float avg = average(dataset, size);
   float sum = 0;
   for (int i = 0; i < size; i++) {
@@ -94,8 +145,11 @@ float popStdDev(const float dataset[], const int size) {
 }
 
 float smplStdDev(const float dataset[], const int size) {
+  if (isNaN(sizeCheck(size))) {
+    return std::numeric_limits<float>::quiet_NaN();
+  }
   if (size == 1) {
-    return infinity;
+    return std::numeric_limits<float>::infinity();
   }
   float avg = average(dataset, size);
   float sum = 0;
@@ -107,7 +161,13 @@ float smplStdDev(const float dataset[], const int size) {
 }
 
 float median(const float dataset[], const int size) {
-  return (dataset[size / 2]);
+  float *working = bubbleSort(dataset, size);
+  if (size % 2 == 0) {
+    return ((working[(size / 2) - 1] + working[size / 2]) / 2);
+  }
+  else {
+    return (working[size / 2]);
+  }
 }
 
 //////////////////////////////////////////////////////////////
@@ -122,8 +182,8 @@ float median(const float dataset[], const int size) {
 #ifndef MARMOSET_TESTING
 
 int main(const int argc, const char* const argv[]) {
-  int size = 6;
-  float dataset[] = {1, 2, 3, 4, 5, 6};
+  int size = 15;
+  float dataset[] = {-17.6028, -10.9157, -16.7465, -16.9766, -18.6747, -7.96327, -10.0283, -16.5234, -9.16662, -13.3095, -12.161, -14.4331, -10.4718, -12.701, -19.2834};
   float min = minimum(dataset, size);
   float avg = average(dataset, size);
   float max = maximum(dataset, size);
@@ -141,7 +201,6 @@ int main(const int argc, const char* const argv[]) {
   }
   else
     cout << "Error: unable to compute statistics" << endl;
-
   return 0;
 }
 
