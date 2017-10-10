@@ -188,8 +188,8 @@ float median(const float dataset[], const int size) {
 #ifndef MARMOSET_TESTING
 
 int main(const int argc, const char* const argv[]) {
-  int size = 15;
-  float dataset[] = {-17.6028, -10.9157, -16.7465, -16.9766, -18.6747, -7.96327, -10.0283, -16.5234, -9.16662, -13.3095, -12.161, -14.4331, -10.4718, -12.701, -19.2834};
+  int size = 4;
+  float dataset[] = {17.6028, 10.9157, 17.6028, 17.6028};
   float min = minimum(dataset, size);
   float avg = average(dataset, size);
   float max = maximum(dataset, size);
