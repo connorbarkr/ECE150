@@ -4,7 +4,6 @@
 //
 
 #include <stdlib.h>
-#include <climits>
 
 //////////////////////////////////////////////////////////////
 //
@@ -43,7 +42,7 @@ int least(int a, int b) {
 }
 
 int greatestCommonDenominator(const int a, const int b) {
-  if (a <=0 || b <=0) {
+  if (a < 1 || b < 1) {
     return -1;
   }
   int result = 0;
@@ -71,6 +70,9 @@ int greatestCommonDenominator(const int a, const int b) {
 }
 
 int leastCommonMultiple(const int a, const int b) {
+  if (a < 1 || b < 1) {
+    return -1;
+  }
   int c = greatest(a, b);
   int d = least(a, b);
   int result = (c / greatestCommonDenominator(c, d)) * d;
