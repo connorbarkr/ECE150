@@ -30,47 +30,47 @@ float NthRoot(const float S, const int N, const float precision);
 //
 
 float pow(float number, int power) {
-  float result = number;
-  for (int i = 1; i < power; i++) {
-    result *= number;
-  }
-  return result;
+	float result = number;
+	for (int i = 1; i < power; i++) {
+		result *= number;
+	}
+	return result;
 }
 
 float abs(float number) {
-  if (number < 0) {
-    return number * -1;
-  }
-  else {
-    return number;
-  }
+	if (number < 0) {
+		return number * -1;
+	}
+	else {
+		return number;
+	}
 }
 
 float NthRoot(const float S, const int N, const float precision) {
-  float number = S;
-  int root = N;
-  float result = number / root;
-  float previous;
+	float number = S;
+	int root = N;
+	float result = number / root;
+	float previous;
 
-  if (number == 0) {
-    return 0;
-  }
-  if (root < 2) {
-    return std::numeric_limits<float>::quiet_NaN();
-  }
-  if (((abs(root) % 2) == 0) && number < 0) {
-    return std::numeric_limits<float>::quiet_NaN();
-  }
-  if (precision <= 0 || precision >= 1) {
-    return std::numeric_limits<float>::quiet_NaN();
-  }
+	if (number == 0) {
+		return 0;
+	}
+	if (root < 2) {
+		return std::numeric_limits<float>::quiet_NaN();
+	}
+	if (((abs(root) % 2) == 0) && number < 0) {
+		return std::numeric_limits<float>::quiet_NaN();
+	}
+	if (precision <= 0 || precision >= 1) {
+		return std::numeric_limits<float>::quiet_NaN();
+	}
 
-  do {
-    previous = result;
-    result = (((root - 1.0 ) / root) * previous) + (number / (root * pow(previous, root - 1)));
-  } while (abs(abs(result) - abs(previous)) >= precision);
+	do {
+		previous = result;
+		result = (((root - 1.0 ) / root) * previous) + (number / (root * pow(previous, root - 1)));
+	} while (abs(abs(result) - abs(previous)) >= precision);
 
-  return result;
+	return result;
 }
 
 //////////////////////////////////////////////////////////////
@@ -88,19 +88,19 @@ float NthRoot(const float S, const int N, const float precision) {
 
 int main(const int argc, const char* const argv[]) {
 
-  if (argc < 4) {
-    cerr << "Error: Usage: " << argv[0] << " <number> <root> <precision>; exiting" << endl;
-    return -1;
-  }
+	if (argc < 4) {
+		cerr << "Error: Usage: " << argv[0] << " <number> <root> <precision>; exiting" << endl;
+		return -1;
+	}
 
-  float root = NthRoot(atof(argv[1]),atoi(argv[2]),atof(argv[3]));
-  if (isNaN(root))
-    cerr << "Unable to compute " << argv[2] << "th root of " << argv[1] << " with precision " << argv[3] << endl;
-  else
-    cout << "Root(" << argv[1] << "," << argv[2] << ") = " << root << endl
-	 << "(with precision " << argv[3] << ")" << endl;
+	float root = NthRoot(atof(argv[1]),atoi(argv[2]),atof(argv[3]));
+	if (isNaN(root))
+		cerr << "Unable to compute " << argv[2] << "th root of " << argv[1] << " with precision " << argv[3] << endl;
+	else
+		cout << "Root(" << argv[1] << "," << argv[2] << ") = " << root << endl
+		     << "(with precision " << argv[3] << ")" << endl;
 
-  return 0;
+	return 0;
 }
 
 #endif
