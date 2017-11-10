@@ -3,22 +3,22 @@
 // Your #includes here; make sure you are allowed them ...
 //
 
-#include <stdlib.h>
-#include <limits>
+ #include <stdlib.h>
+ #include <limits>
 
 //////////////////////////////////////////////////////////////
 //
 // #includes and function declarations; do not remove
 //
 
-#ifndef MARMOSET_TESTING
+ #ifndef MARMOSET_TESTING
 
-#include <iostream>
+ #include <iostream>
 
 using namespace std;
 
 float NthRoot(const float S, const int N, const float precision);
-#endif
+ #endif
 
 //////////////////////////////////////////////////////////////
 //
@@ -31,6 +31,9 @@ float NthRoot(const float S, const int N, const float precision);
 
 float pow(float number, int power) {
 	float result = number;
+	if (power == 0) {
+		return 1;
+	}
 	for (int i = 1; i < power; i++) {
 		result *= number;
 	}
@@ -82,9 +85,9 @@ float NthRoot(const float S, const int N, const float precision) {
 // this test driver will be ignored by Marmoset
 //
 
-#ifndef MARMOSET_TESTING
+ #ifndef MARMOSET_TESTING
 
-#define isNaN(X) (X != X)  // NaN is the only float that is not equal to itself
+ #define isNaN(X) (X != X)  // NaN is the only float that is not equal to itself
 
 int main(const int argc, const char* const argv[]) {
 
@@ -103,4 +106,4 @@ int main(const int argc, const char* const argv[]) {
 	return 0;
 }
 
-#endif
+ #endif
