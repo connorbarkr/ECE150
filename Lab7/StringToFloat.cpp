@@ -161,7 +161,6 @@ bool stringToFloat(const char input[], float& value) {
 			if (toFloat(input[c]) >= 0) {
 				ec += (ec * 10) + toFloat(input[c]);
 			}
-			cout << ec << endl;
 			c++;
 			if (signCheck(input[c]) > 0) {
 				if (signCheck(input[c]) == 1) expNeg = true;
