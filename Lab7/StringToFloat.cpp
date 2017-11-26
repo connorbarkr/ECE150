@@ -116,7 +116,10 @@ bool stringToFloat(const char input[], float& value) {
 				STATE = INT;
 				break;
 			}
-			if (input[c] == 'e') {
+			if (input[c] == 'e' || input[c] == 'E') {
+				if (nullCheck(input[(c + 1)])) {
+					return false;
+				}
 				STATE = POWER;
 				break;
 			}
@@ -143,7 +146,10 @@ bool stringToFloat(const char input[], float& value) {
 			verify += (((long double) (1.0/(power(10.0, dp)))) * toLD(input[c]));
 			result += (((float) (1.0/(power(10.0, dp)))) * toFloat(input[c]));
 			c++;
-			if (input[c] == 'e') {
+			if (input[c] == 'e' || input[c] == 'E') {
+				if (nullCheck(input[(c + 1)])) {
+					return false;
+				}
 				STATE = POWER;
 				break;
 			}
