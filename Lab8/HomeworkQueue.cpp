@@ -136,6 +136,7 @@ const Assignment* dueIn(const HomeworkQueue* q, const int numDays) {
 	struct tm * timeinfo;
 	time (&rawtime);
 	timeinfo = localtime (&rawtime);
+
 	int dayOfYear = ((timeinfo->tm_mon) * 30) + timeinfo->tm_mday;
 	int assnSize = 0;
 	const HomeworkQueue *current = new HomeworkQueue;

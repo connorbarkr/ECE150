@@ -129,7 +129,7 @@ bool hitTargetGivenVelocity (const float h, const float v, const float m,
 	if ((dx = vx * ((-(sqrt(pow(vy, 2) + (2 * -9.8 * -(h - t)))) - vy) / -9.8)) >= d) {
 		right = 89;
 		left = angle;
-		angle = bisection(left, right, 0.0001, 0.0000002, v, t, d, h);
+		angle = bisection(left, right, 0.001, 0.002, v, t, d, h);
 		if (angle < 0) {
 			return false;
 		}
@@ -166,12 +166,11 @@ int main() {
 	float h = 50;
 	float d = 60;
 	float b = 40;
-	float t = 0;
+	float t = 30;
 	float w = 30;
 	float m = 1;
-
-	float theta = 68.81;                         // Angle in degrees;
-	float v = 45.21;
+	float theta = 45;                         // Angle in degrees;
+	float v = 25;
 
 	cout << "Given angle: " << theta << endl;
 	cout << "Target at (" << d << "," << t << ")" << endl;
