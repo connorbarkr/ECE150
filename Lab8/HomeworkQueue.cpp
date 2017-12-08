@@ -127,6 +127,7 @@ int daysTillDue(const HomeworkQueue* q, const COURSE course) {
 		int dayOfYear = ((timeinfo->tm_mon) * 30) + timeinfo->tm_mday;
 		return (dueIn - dayOfYear);
 	}
+	current = NULL;
 	delete current;
 	return INT_MAX;
 }
